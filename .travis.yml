@@ -108,19 +108,18 @@ install:
     GTEST_GIT_REPO="https://github.com/google/googletest.git"
     GTEST_GIT_HASH="703bd9caab50b139428cea1aaff9974ebee5742e"
     GTEST_DIR="${DEPS_DIR}/googletest/googletest-703bd9c"
-    if [[ "${BUILD_TESTS}" == "true" ]]; then
-      if [[ -z "$(ls -A ${GTEST_DIR})" ]]; then
-        mkdir -p ${GTEST_DIR}
-        git clone ${GTEST_GIT_REPO} ${GTEST_DIR}
-        cd ${GTEST_DIR}
-        git reset --hard ${GTEST_GIT_HASH}
-      fi
-      if [[ "${CXX%%+*}" == "clang" ]]; then
-        (mkdir -p ${GTEST_DIR}/build && cd ${GTEST_DIR}/build && cmake .. -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++ ${CXXFLAGS}" -DCMAKE_INSTALL_PREFIX="${HOME}/prefix_root" && cmake --build . -j${PARALLEL_BUILD_JOBS} --target install)
-      else
-        (mkdir -p ${GTEST_DIR}/build && cd ${GTEST_DIR}/build && cmake .. -DCMAKE_INSTALL_PREFIX="${HOME}/prefix_root" && cmake --build . -j${PARALLEL_BUILD_JOBS} --target install)
-      fi
+    if [[ -z "$(ls -A ${GTEST_DIR})" ]]; then
+      mkdir -p ${GTEST_DIR}
+      git clone ${GTEST_GIT_REPO} ${GTEST_DIR}
+      cd ${GTEST_DIR}
+      git reset --hard ${GTEST_GIT_HASH}
     fi
+    if [[ "${CXX%%+*}" == "clang" ]]; then
+      (mkdir -p ${GTEST_DIR}/build && cd ${GTEST_DIR}/build && cmake .. -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++ ${CXXFLAGS}" -DCMAKE_INSTALL_PREFIX="${HOME}/prefix_root" && cmake --build . -j${PARALLEL_BUILD_JOBS} --target install)
+    else
+      (mkdir -p ${GTEST_DIR}/build && cd ${GTEST_DIR}/build && cmake .. -DCMAKE_INSTALL_PREFIX="${HOME}/prefix_root" && cmake --build . -j${PARALLEL_BUILD_JOBS} --target install)
+    fi
+
 
 before_script:
   - cd ${TRAVIS_BUILD_DIR}
