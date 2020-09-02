@@ -7,7 +7,7 @@ cache:
     - ${HOME}/deps/cmake-3.18.2
 
 jobs:
-  include:
+  allow_failures:
     - env: COMPILER=clang++-10 MEMORY_SANITIZER=Valgrind
       addons: {
         apt: {
