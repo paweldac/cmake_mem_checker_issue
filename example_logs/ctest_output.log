@@ -1,0 +1,50 @@
+   Site: odyn
+   Build name: Linux-c++
+Memory check project /home/pawel/Personal/Projects/cmake_mem_checker_issue/build
+    Start 2: OkTest.checkIfTrueIsNotFalse
+1/4 MemCheck #2: OkTest.checkIfTrueIsNotFalse .....   Passed    0.02 sec
+Cannot find memory tester output file: /home/pawel/Personal/Projects/cmake_mem_checker_issue/build/Testing/Temporary/MemoryChecker.2.log.*
+    Start 3: LeakingTest.leakingArray
+2/4 MemCheck #3: LeakingTest.leakingArray .........***Failed    0.05 sec
+Running main() from /build/gtest/src/googletest-release-1.10.0/googletest/src/gtest_main.cc
+Note: Google Test filter = LeakingTest.leakingArray
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LeakingTest
+[ RUN      ] LeakingTest.leakingArray
+[       OK ] LeakingTest.leakingArray (1 ms)
+[----------] 1 test from LeakingTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (1 ms total)
+[  PASSED  ] 1 test.
+
+    Start 1: OkTest.checkIfFalseIsNotTrue
+3/4 MemCheck #1: OkTest.checkIfFalseIsNotTrue .....   Passed    0.01 sec
+Cannot find memory tester output file: /home/pawel/Personal/Projects/cmake_mem_checker_issue/build/Testing/Temporary/MemoryChecker.1.log.*
+    Start 4: DoubleFreeTest.doubleFreeTest
+4/4 MemCheck #4: DoubleFreeTest.doubleFreeTest ....***Failed    0.03 sec
+Running main() from /build/gtest/src/googletest-release-1.10.0/googletest/src/gtest_main.cc
+Note: Google Test filter = DoubleFreeTest.doubleFreeTest
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from DoubleFreeTest
+[ RUN      ] DoubleFreeTest.doubleFreeTest
+
+
+50% tests passed, 2 tests failed out of 4
+
+Total Test time (real) =   0.11 sec
+
+The following tests FAILED:
+	  3 - LeakingTest.leakingArray (Failed)
+	  4 - DoubleFreeTest.doubleFreeTest (Failed)
+-- Processing memory checking output:
+2/4 MemCheck: #3: LeakingTest.leakingArray .........   Defects: 1
+4/4 MemCheck: #4: DoubleFreeTest.doubleFreeTest ....   Defects: 1
+MemCheck log files can be found here: (<#> corresponds to test number)
+/home/pawel/Personal/Projects/cmake_mem_checker_issue/build/Testing/Temporary/MemoryChecker.<#>.log
+Memory checking results:
+Direct leak - 1
+attempting double-free - 1
+        Errors while running CTest

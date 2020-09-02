@@ -1,0 +1,33 @@
+Running main() from /build/gtest/src/googletest-release-1.10.0/googletest/src/gtest_main.cc
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from DoubleFreeTest
+[ RUN      ] DoubleFreeTest.doubleFreeTest
+=================================================================
+==82075==ERROR: AddressSanitizer: attempting double-free on 0x604000000590 in thread T0:
+    #0 0x7f27a4c0bc09 in operator delete[](void*) /build/gcc/src/gcc/libsanitizer/asan/asan_new_delete.cpp:163
+    #1 0x55d9b72284d0 in DoubleFreeTest_doubleFreeTest_Test::TestBody() (/home/pawel/Personal/Projects/cmake_mem_checker_issue/build/double-free.ut+0x34d0)
+    #2 0x7f27a4b1b806 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (/usr/lib/libgtest.so.1.10.0+0x4e806)
+    #3 0x7f27a4b0f090 in testing::Test::Run() (/usr/lib/libgtest.so.1.10.0+0x42090)
+    #4 0x7f27a4b0f1ee in testing::TestInfo::Run() (/usr/lib/libgtest.so.1.10.0+0x421ee)
+    #5 0x7f27a4b0f2d6 in testing::TestSuite::Run() (/usr/lib/libgtest.so.1.10.0+0x422d6)
+    #6 0x7f27a4b0f853 in testing::internal::UnitTestImpl::RunAllTests() (/usr/lib/libgtest.so.1.10.0+0x42853)
+    #7 0x7f27a4b1be36 in bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) (/usr/lib/libgtest.so.1.10.0+0x4ee36)
+    #8 0x7f27a4b0fa79 in testing::UnitTest::Run() (/usr/lib/libgtest.so.1.10.0+0x42a79)
+    #9 0x7f27a4b34063 in main (/usr/lib/libgtest_main.so.1.10.0+0x1063)
+    #10 0x7f27a45cb151 in __libc_start_main (/usr/lib/libc.so.6+0x28151)
+    #11 0x55d9b72282fd in _start (/home/pawel/Personal/Projects/cmake_mem_checker_issue/build/double-free.ut+0x32fd)
+
+0x604000000590 is located 0 bytes inside of 40-byte region [0x604000000590,0x6040000005b8)
+freed by thread T0 here:
+    #0 0x7f27a4c0bc09 in operator delete[](void*) /build/gcc/src/gcc/libsanitizer/asan/asan_new_delete.cpp:163
+    #1 0x55d9b72284b7 in DoubleFreeTest_doubleFreeTest_Test::TestBody() (/home/pawel/Personal/Projects/cmake_mem_checker_issue/build/double-free.ut+0x34b7)
+    #2 0x7f27a4b1b806 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (/usr/lib/libgtest.so.1.10.0+0x4e806)
+
+previously allocated by thread T0 here:
+    #0 0x7f27a4c0b0c1 in operator new[](unsigned long) /build/gcc/src/gcc/libsanitizer/asan/asan_new_delete.cpp:102
+    #1 0x55d9b7228497 in DoubleFreeTest_doubleFreeTest_Test::TestBody() (/home/pawel/Personal/Projects/cmake_mem_checker_issue/build/double-free.ut+0x3497)
+    #2 0x7f27a4b1b806 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (/usr/lib/libgtest.so.1.10.0+0x4e806)
+
+SUMMARY: AddressSanitizer: double-free /build/gcc/src/gcc/libsanitizer/asan/asan_new_delete.cpp:163 in operator delete[](void*)
+==82075==ABORTING
