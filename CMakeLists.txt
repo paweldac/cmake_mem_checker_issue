@@ -37,6 +37,8 @@ else()
   message(STATUS "Sanitizers are disabled in build")
 endif()
 
+add_compile_options("$<$<COMPILE_LANG_AND_ID:CXX,Clang,AppleClang>:-stdlib=libc++>")
+
 include(CTest)
 enable_testing()
 find_package(GTest CONFIG REQUIRED)
