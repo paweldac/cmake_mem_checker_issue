@@ -1,6 +1,10 @@
-# cmake_mem_checker_issue
+# cmake_mem_checker_issue - fixed by https://gitlab.kitware.com/cmake/cmake/-/merge_requests/5698
 
 Project showing CMake/CTest issue related to lack of output from memchecks.
+
+Reported issue: https://gitlab.kitware.com/cmake/cmake/-/issues/21155#note_885072
+
+Pull request with fix: https://gitlab.kitware.com/cmake/cmake/-/merge_requests/5698
 
 Reproduce steps:
 ```
